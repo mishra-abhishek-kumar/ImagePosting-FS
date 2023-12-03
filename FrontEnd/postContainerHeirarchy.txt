@@ -1,0 +1,14 @@
+postContainer
+    - post (div)
+        - postImage (div)
+            - img
+        - postDescription (div)
+            - paragraph
+        - addCommentBtn (div)
+            - input (class: addNewCommentBtn)
+        - addCommenForm (div)
+            - input (class: newComment)
+            - input (class: sendComment)
+        - allComments (div)
+            - commentList (ul)
+                - li

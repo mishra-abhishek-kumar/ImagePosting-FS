@@ -4,6 +4,7 @@ let formUrl = document.getElementById('form-url');
 let formDescription = document.getElementById('form-description');
 
 //accessing post elements
+let postContainer = document.getElementById('post-container');
 let addComment = document.getElementById('add-new-comment-btn');
 let typedComment = document.getElementById('new-comment');
 let sentComment = document.getElementById('send-comment');
@@ -30,6 +31,7 @@ addNewCommentBtn.className = 'addNewCommentBtn';
 newComment.className = 'newComment';
 sendComment.className = 'sendComment';
 allComments.className = 'allComments';
+commentList.className = 'commentList';
 
 //setting attributes for the elements
 addNewCommentBtn.setAttribute('type', 'button');
@@ -47,14 +49,28 @@ sendComment.setAttribute('id', 'send-comment');
 sendComment.setAttribute('name', 'sentComment');
 sendComment.setAttribute('value', 'send');
 
-//adding values from form
-img.src = formUrl.value;
-paragraph.src = formDescription.value;
-
 //EventListeners
 form.addEventListener('submit', createPost);
 
 function createPost(e) {
     e.preventDefault();
+    //appending childs to parent
+    postImage.appendChild(img);
+    postDescription.appendChild(paragraph);
+    addComentBtn.appendChild(addNewCommentBtn);
+    addCommentForm.appendChild(newComment);
+    addCommentForm.appendChild(sendComment);
+    allComments.appendChild(commentList);
+    post.appendChild(postImage);
+    post.appendChild(postDescription);
+    post.appendChild(addComentBtn);
+    post.appendChild(addCommentForm);
+    post.appendChild(allComments);
+    postContainer.appendChild(post);
+
+    //adding values from form
+    img.src = formUrl.value;
+    paragraph.innerText = formDescription.value;
+
     console.log("Working");
 }

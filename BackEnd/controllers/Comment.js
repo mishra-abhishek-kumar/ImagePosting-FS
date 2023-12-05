@@ -3,7 +3,7 @@ const Comment = require('../models/Comment');
 const createComment = (req, res) => {
     Comment.create({
         comment: req.body.comment,
-        postId: req.post.id
+        postId: req.params.postId
     })
     .then(comment => {
         res.send(comment);
@@ -12,7 +12,8 @@ const createComment = (req, res) => {
 }
 
 const getComment = (req, res) => {
-    Comment.findAll()
+    const postId = req.params.postId;
+    Comment.findAll({where: {postId: postId}})
         .then(comments => {
             res.send(comments);
         })

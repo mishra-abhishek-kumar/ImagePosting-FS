@@ -17,6 +17,10 @@ const sequelize = require('./util/dbConnect');
 const Post = require('./models/Post'); //Without this table was not getting created
 const Comment = require('./models/Comment');
 
+//import required to allow CORS origin connection
+const cors = require("cors");
+app.use(cors());
+
 app.use('/', mainRoute);
 
 app.get('/:temp', (req, res) => {
@@ -31,7 +35,6 @@ Comment.belongsTo(Post, {constraints: true}); //this constraints specifies that 
 // sequelize.sync({force: true})
 sequelize.sync()
     .then(post => {
-        // console.log(post);
         app.listen(PORT, () => {
             console.log("Listening on PORT:", PORT);
         });

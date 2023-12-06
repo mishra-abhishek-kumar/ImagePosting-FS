@@ -6,7 +6,7 @@ let formDescription = document.getElementById('form-description');
 //EventListeners
 form.addEventListener('submit', createPost);
 
-function createPost(e) {
+async function createPost(e) {
     e.preventDefault();
 
     //creating post div and assigning class
@@ -51,6 +51,17 @@ function createPost(e) {
     //accessing postContainer
     let postContainer = document.getElementById('post-container');
     postContainer.appendChild(post);
+
+    try {
+        const response = await axios.post('http://localhost:4000/post/create-post', {
+            postUrl: `${formUrl.value}`,
+            postDescription: `${formDescription.value}`
+        });
+        console.log(response.data);
+    } catch (error) {
+        console.log(error);
+    }
+
 
     console.log("Create post working");
 
@@ -106,7 +117,7 @@ function createPost(e) {
 
                 if (e.target.classList.contains('sendComment')) {
                     //creating li's 
-                    let li = document.createElement('li');
+                    let li = document.createElement('li');  
                     
                     //appending/removing elements to/from parent
                     post.removeChild(addCommentForm);

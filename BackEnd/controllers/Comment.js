@@ -1,23 +1,23 @@
 const Comment = require('../models/Comment');
 
-const createComment = (req, res) => {
-    Comment.create({
-        comment: req.body.comment,
-        postId: req.params.postId
-    })
-    .then(comment => {
-        res.send(comment);
-    })
-    .catch(err => console.log(err));
+const createComment = async (req, res) => {
+    try {
+        await Comment.create({
+            comment: req.body.comment,
+            postId: req.params.postId
+        })
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-const getComment = (req, res) => {
+const getComment = async (req, res) => {
     const postId = req.params.postId;
-    Comment.findAll({where: {postId: postId}})
-        .then(comments => {
-            res.send(comments);
-        })
-        .catch(err => console.log(err));
+    try {
+        await Comment.findAll({ where: { postId: postId } })
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports = {

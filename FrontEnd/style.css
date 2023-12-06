@@ -162,7 +162,7 @@ input[type=submit]:active {
     border-radius: 10px;
     border: 1px solid gray;
     outline: none;
-    margin: 15px 0px 0px 14px;
+    margin: 15px 0px 15px 14px;
 }
 
 .newComment:focus {

@@ -2,10 +2,11 @@ const Comment = require('../models/Comment');
 
 const createComment = async (req, res) => {
     try {
-        await Comment.create({
+        const comment = await Comment.create({
             comment: req.body.comment,
             postId: req.params.postId
         })
+        res.json(comment);
     } catch (error) {
         console.log(error);
     }
@@ -14,7 +15,8 @@ const createComment = async (req, res) => {
 const getComment = async (req, res) => {
     const postId = req.params.postId;
     try {
-        await Comment.findAll({ where: { postId: postId } })
+        const comments = await Comment.findAll({ where: { postId: postId } })
+        res.json(comments);
     } catch (error) {
         console.log(error);
     }

@@ -2,10 +2,11 @@ const Post = require('../models/Post');
 
 const createPost = async (req, res) => {
     try {
-        await Post.create({
+        const post = await Post.create({
             postUrl: req.body.postUrl,
             postDescription: req.body.postDescription
         })
+        res.json(post);
     } catch (error) {
         console.log(error);
     }
@@ -13,7 +14,8 @@ const createPost = async (req, res) => {
 
 const getPost = async (req, res) => {
     try {
-        await Post.findAll()
+        const posts = await Post.findAll()
+        res.json(posts);
     } catch (error) {
         console.log(error);
     }

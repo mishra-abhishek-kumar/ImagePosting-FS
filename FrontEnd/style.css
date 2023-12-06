@@ -76,6 +76,7 @@ input[type=submit] {
     padding: 0.5rem;
     border: 1px solid #2196f3;
     border-radius: 10px;
+    transition: background-color 100ms linear;
 }
 
 input[type=submit]:hover {
@@ -143,6 +144,7 @@ input[type=submit]:active {
     border: 1px solid #2196f3;
     border-radius: 10px;
     margin: 10px 0px 15px 15px;
+    transition: background-color 100ms linear;
 }
 
 .addNewCommentBtn:hover {
@@ -180,6 +182,7 @@ input:focus::-webkit-input-placeholder {
     border: 1px solid #2196f3;
     border-radius: 10px;
     margin-left: 5px;
+    transition: background-color 100ms linear;
 }
 
 .sendComment:hover {

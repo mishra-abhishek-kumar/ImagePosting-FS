@@ -36,7 +36,7 @@ async function createPost(e) {
     let addNewCommentBtn = document.createElement('input');
     addNewCommentBtn.className = 'addNewCommentBtn';
     addNewCommentBtn.setAttribute('type', 'button');
-    addNewCommentBtn.setAttribute('id', 'add-new-comment-btn');
+    // addNewCommentBtn.setAttribute('id', 'add-new-comment-btn');
     addNewCommentBtn.setAttribute('name', 'addComment');
     addNewCommentBtn.setAttribute('value', 'Add Comment');
 
@@ -57,7 +57,11 @@ async function createPost(e) {
             postUrl: `${formUrl.value}`,
             postDescription: `${formDescription.value}`
         });
+        post.setAttribute('id', response.data.id);
+        addNewCommentBtn.setAttribute('id', response.data.id);
         console.log(response.data);
+        var postId = response.data.id;
+        // console.log(postId);
     } catch (error) {
         console.log(error);
     }
@@ -66,7 +70,7 @@ async function createPost(e) {
     console.log("Create post working");
 
     //accessing add-comment button to listen on it
-    let commentBtn = document.getElementById('add-new-comment-btn');
+    let commentBtn = document.getElementById(postId);
     commentBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -112,10 +116,13 @@ async function createPost(e) {
             //accessing typed-comment send-comment button to add comments
             let typed_comment = document.getElementById('new-comment');
             let sendBtn = document.getElementById('send-comment');
-            sendBtn.addEventListener('click', (e) => {
+            sendBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
 
                 if (e.target.classList.contains('sendComment')) {
+
+                    const postId = e.target.parentElement.parentElement.id;
+                    
                     //creating li's 
                     let li = document.createElement('li');  
                     
@@ -124,6 +131,15 @@ async function createPost(e) {
                     addCommentBtn.appendChild(addNewCommentBtn);
                     li.appendChild(document.createTextNode(typed_comment.value));
                     commentList.appendChild(li);
+
+                    try {
+                        const response = await axios.post(`http://localhost:4000/comment/create-comment/${postId}`, {
+                            comment: `${typed_comment.value}`
+                        });
+                        console.log(response.data);
+                    } catch (error) {
+                        console.log(error);
+                    }
 
                     console.log("adding comments working");
                 }
